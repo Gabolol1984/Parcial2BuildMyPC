@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @Data
 public class cpuDTO {
+    private Long id;
     @NotBlank(message = "El socket es obligatorio")
     private String socket;
 

@@ -6,9 +6,8 @@ import com.service.cpu.cpuDTO.cpuDTO;
 import java.util.List;
 
 public interface cpuService {
-    cpu create(cpuDTO dto);
     List<cpu> getAll();
     cpu getById(Long id);
-    cpu update(cpuDTO dto);
+    cpu updateById(Long id,cpu cpu);
     void delete(Long id);
 }

@@ -29,9 +29,7 @@ public class cpu {
     private Integer hilos;
 
     @Column(nullable = false)
-    private Double frecuenciaBase;   // GHz
-
-    private Double frecuenciaTurbo;  // GHz
+    private Double frecuenciaBase;   // GH
 
     @Column(nullable = false)
     private Integer tdpWatts;        // Consumo energético
