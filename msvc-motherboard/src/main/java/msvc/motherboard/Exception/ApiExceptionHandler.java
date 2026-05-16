@@ -24,7 +24,7 @@ public class ApiExceptionHandler {
         return ResponseEntity.badRequest().body(errors);
     }
 
-    // Errores de lógica de negocio (ej: "Motherboard no encontrada")
+    // Errores de lógica de negocio ("Motherboard no encontrada")
     @ExceptionHandler(MotherboardException.class)
     public ResponseEntity<?> handleMotherboardException(MotherboardException ex) {
         Map<String, String> error = new HashMap<>();

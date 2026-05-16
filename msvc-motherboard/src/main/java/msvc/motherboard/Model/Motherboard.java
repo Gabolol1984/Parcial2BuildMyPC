@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-
+@Table(name = "motherboard")
 public class Motherboard {
     @Id @GeneratedValue
     private Long id;
