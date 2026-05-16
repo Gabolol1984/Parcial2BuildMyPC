@@ -36,17 +36,10 @@ public class cpu {
     @Column(nullable = false)
     private Integer tdpWatts;        // Consumo energético
 
-    @Column(length = 50)
+    @Column
     private String generacion;       // Ej: Ryzen 7000, Core 13th Gen
 
     private Boolean soportaDdr4;
     private Boolean soportaDdr5;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private EstadoCpu estado;
-
-    public enum EstadoCpu {
-        ACTIVO, INACTIVO
-    }
 }
