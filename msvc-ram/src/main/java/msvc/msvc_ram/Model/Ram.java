@@ -41,7 +41,7 @@ public class Ram {
 
     // ===== Campos técnicos RAM =====
     @NotBlank(message = "El tipo DDR es obligatorio")
-    private String ddr;
+    private String tipoDdr;
 
     @NotNull(message = "La capacidad es obligatoria")
     private Integer capacidadGb;

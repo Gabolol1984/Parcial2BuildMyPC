@@ -12,13 +12,5 @@ public interface RamService {
     Ram updateById(Long id, Ram ram);
     void deleteById(Long id);
 
-    Ram create(RamDTO d);
 
-    List<Ram> getAll();
-
-    Ram getById(Long id);
-
-    Ram update(Long id, RamDTO d);
-
-    void deactivate(Long id);
 }
