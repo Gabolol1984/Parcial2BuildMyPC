@@ -1,0 +1,7 @@
+package msvc_gpu.msvc_gpu.Exception;
+
+public class GpuException extends RuntimeException {
+    public GpuException(String message) {
+        super(message);
+    }
+}
