@@ -3,11 +3,13 @@ package com.service.cpu.cpuDTO;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Data
+@NoArgsConstructor
 public class cpuDTO {
     private Long id;
     @NotBlank(message = "El socket es obligatorio")
