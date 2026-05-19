@@ -41,6 +41,7 @@ public class cpuController {
                 .body(CpuService.updateById(id,cpu));
     }
 
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable Long id) {
         CpuService.delete(id);
         return ResponseEntity.noContent().build();
