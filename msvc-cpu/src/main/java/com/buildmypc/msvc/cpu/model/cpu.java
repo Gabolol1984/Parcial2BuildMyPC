@@ -1,4 +1,4 @@
-package msvc.cpu.model;
+package com.buildmypc.msvc.cpu.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;

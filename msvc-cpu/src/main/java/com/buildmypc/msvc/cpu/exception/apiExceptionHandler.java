@@ -1,4 +1,4 @@
-package msvc.cpu.Exception;
+package com.buildmypc.msvc.cpu.exception;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;

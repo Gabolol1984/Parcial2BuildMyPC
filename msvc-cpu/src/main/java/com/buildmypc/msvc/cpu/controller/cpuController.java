@@ -1,7 +1,7 @@
-package msvc.cpu.Controller;
+package com.buildmypc.msvc.cpu.controller;
 
-import msvc.cpu.model.cpu;
-import msvc.cpu.Service.cpuService;
+import com.buildmypc.msvc.cpu.model.cpu;
+import com.buildmypc.msvc.cpu.service.cpuService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

@@ -1,4 +1,4 @@
-package msvc.cpu.cpuDTO;
+package com.buildmypc.msvc.cpu.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

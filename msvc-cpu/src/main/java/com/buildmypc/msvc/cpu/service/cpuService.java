@@ -1,6 +1,6 @@
-package msvc.cpu.Service;
+package com.buildmypc.msvc.cpu.service;
 
-import msvc.cpu.model.cpu;
+import com.buildmypc.msvc.cpu.model.cpu;
 
 import java.util.List;
 

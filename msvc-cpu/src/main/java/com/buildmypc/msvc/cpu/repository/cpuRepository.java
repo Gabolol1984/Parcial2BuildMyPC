@@ -1,6 +1,6 @@
-package msvc.cpu.Repository;
+package com.buildmypc.msvc.cpu.repository;
 
-import msvc.cpu.model.cpu;
+import com.buildmypc.msvc.cpu.model.cpu;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

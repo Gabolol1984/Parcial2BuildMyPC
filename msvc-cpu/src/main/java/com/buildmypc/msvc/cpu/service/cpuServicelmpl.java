@@ -1,8 +1,8 @@
-package msvc.cpu.Service;
+package com.buildmypc.msvc.cpu.service;
 
-import msvc.cpu.Exception.cpuException;
-import msvc.cpu.model.cpu;
-import msvc.cpu.Repository.cpuRepository;
+import com.buildmypc.msvc.cpu.exception.cpuException;
+import com.buildmypc.msvc.cpu.model.cpu;
+import com.buildmypc.msvc.cpu.repository.cpuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class cpuServicelmpl implements cpuService{
+public class cpuServicelmpl implements cpuService {
 
     @Autowired
     private cpuRepository cpuRepository;
