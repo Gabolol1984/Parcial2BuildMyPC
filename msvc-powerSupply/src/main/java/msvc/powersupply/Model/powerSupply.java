@@ -3,6 +3,7 @@ package msvc.powersupply.Model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -23,7 +24,7 @@ public class powerSupply {
     @Column(nullable = false)
     private Long componenteId;
 
-    @NotBlank(message = "El campo de potencia en watts no puede estar vacio")
+    @NotNull(message = "El campo de potencia en watts no puede estar vacio")
     @Column(nullable = false)
     private Integer potenciaWatts;
 
@@ -34,7 +35,7 @@ public class powerSupply {
     @Column(nullable = false)
     private Boolean modular;          // true = modular, false = no modular
 
-    @NotBlank(message = "El campo de conectores no puede estar vacio")
+    @NotNull(message = "El campo de conectores no puede estar vacio")
     @Column(nullable = false)
     private Integer conectoresPcie;
 }

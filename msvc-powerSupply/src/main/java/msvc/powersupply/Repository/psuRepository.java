@@ -1,5 +1,6 @@
 package msvc.powersupply.Repository;
 
+
 import msvc.powersupply.Model.powerSupply;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
