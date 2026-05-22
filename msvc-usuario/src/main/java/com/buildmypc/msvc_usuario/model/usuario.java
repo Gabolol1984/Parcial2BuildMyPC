@@ -2,6 +2,8 @@ package com.buildmypc.msvc_usuario.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,18 +23,22 @@ public class usuario {
     @Column(name ="usuario_id")
     private Long id;
 
+    @NotBlank(message = "El nombre es obligatorio")
     @Column(nullable = false, length = 80)
     private String nombre;
 
+    @NotBlank(message = "el apellido es obligatorio")
     @Column(nullable = false, length = 80)
     private String apellido;
 
+    @NotBlank(message = "el email es obligatorio")
     @Column(nullable = false, unique = true, length = 120)
     private String email;
 
     @Column(length = 20)
     private String telefono;
 
+    @NotNull(message = "el rol no es valido")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private RolFuncional rolFuncional;
