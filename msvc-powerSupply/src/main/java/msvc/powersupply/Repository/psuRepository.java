@@ -12,5 +12,5 @@ public interface psuRepository extends JpaRepository<powerSupply,Long> {
 
     Optional<powerSupply> findById(Long id);
     powerSupply save(powerSupply powerSupply);
-    Optional<powerSupply> findByComponenteId(String componenteId);
+    Optional<powerSupply> findByComponenteId(Long componenteId);
 }

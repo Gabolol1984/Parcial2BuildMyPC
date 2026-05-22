@@ -1,6 +1,7 @@
 package com.service.msvc_powerSupply.Exception;
 
 
+import msvc.powersupply.Exception.psuException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

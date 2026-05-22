@@ -2,6 +2,7 @@ package com.buildmypc.msvc_build.model;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +19,7 @@ public class build {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "El ID de usuario es obligatorio")
     @Column(nullable = false)
     private Long usuarioId;
 
@@ -27,6 +29,7 @@ public class build {
     private Long ramId;
     private Long fuenteId;
 
+    @NotNull(message = "El estado de la build no puede estar vacío")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EstadoBuild estado;
