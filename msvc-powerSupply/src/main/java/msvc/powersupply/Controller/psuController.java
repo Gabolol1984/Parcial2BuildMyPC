@@ -31,6 +31,13 @@ public class psuController {
                 .body(psuService.getById(id));
     }
 
+    @PostMapping
+    public ResponseEntity<powerSupply> save(@Valid @RequestBody powerSupply powerSupply){
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(psuService.save(powerSupply));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<powerSupply> updateById(@PathVariable Long id, @Valid @RequestBody powerSupply powerSupply){
         return ResponseEntity

@@ -1,4 +1,4 @@
-package com.buildmypc.msvc_usuario.Model;
+package com.buildmypc.msvc_usuario.model;
 
 
 import jakarta.persistence.*;
@@ -15,9 +15,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Usuario {
+public class usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="usuario_id")
     private Long id;
 
     @Column(nullable = false, length = 80)

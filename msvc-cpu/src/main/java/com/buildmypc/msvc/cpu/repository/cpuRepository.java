@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface cpuRepository extends JpaRepository<cpu, Long> {
     List<cpu> findBySocket(String socket);
     Optional<cpu> findById(Long id);
+    Optional<cpu> findByName(String cpuName);
+    cpu save(cpu cpu);
     List<cpu> findByGeneracion(String generacion);
     List<cpu> id(Long id);
 }

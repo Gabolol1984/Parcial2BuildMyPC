@@ -21,6 +21,10 @@ public class cpu {
     @Column(nullable = false)
     private Long componenteId;
 
+    @NotBlank(message = "El nombre no puede estar vacio")
+    @Column(nullable = false)
+    private String cpuName;
+
     @NotBlank(message = "El campo de socket no puede estar vacio")
     @Column(nullable = false)
     private String socket;           // Ej: AM5, LGA1700

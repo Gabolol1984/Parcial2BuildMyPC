@@ -24,6 +24,9 @@ public class powerSupply {
     @Column(nullable = false)
     private Long componenteId;
 
+    @Column(nullable = false)
+    private String componenteName;
+
     @NotNull(message = "El campo de potencia en watts no puede estar vacio")
     @Column(nullable = false)
     private Integer potenciaWatts;

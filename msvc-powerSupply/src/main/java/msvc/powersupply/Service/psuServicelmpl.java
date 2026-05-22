@@ -15,6 +15,15 @@ public class psuServicelmpl implements psuService {
     @Autowired
     private psuRepository psuRepository;
 
+    @Transactional
+    @Override
+    public powerSupply save(powerSupply powerSupply) {
+        if (this.psuRepository.findByComponenteId(powerSupply.getComponenteName()).isPresent()) {
+            throw new psuException("El componente ya existe en la base de datos");
+        }
+        return this.psuRepository.save(powerSupply);
+    }
+
     @Transactional(readOnly = true)
     @Override
     public List<powerSupply> getAll(){

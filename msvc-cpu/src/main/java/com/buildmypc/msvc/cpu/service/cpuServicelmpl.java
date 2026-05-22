@@ -15,6 +15,14 @@ public class cpuServicelmpl implements cpuService {
     @Autowired
     private cpuRepository cpuRepository;
 
+    @Transactional
+    @Override
+    public cpu save(cpu cpu) {
+        if (this.cpuRepository.findByName(cpu.getCpuName()).isPresent()) {
+            throw new cpuException("cpu existente");
+        }
+        return this.cpuRepository.save(cpu);
+    }
 
     @Transactional(readOnly = true)
     @Override
@@ -46,7 +54,6 @@ public class cpuServicelmpl implements cpuService {
 
     @Override
     public void delete(Long id) {
-
         this.cpuRepository.deleteById(id);
     }
 

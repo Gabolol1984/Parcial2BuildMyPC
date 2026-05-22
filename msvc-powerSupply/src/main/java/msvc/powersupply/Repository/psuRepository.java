@@ -11,5 +11,6 @@ import java.util.Optional;
 public interface psuRepository extends JpaRepository<powerSupply,Long> {
 
     Optional<powerSupply> findById(Long id);
-    Optional<powerSupply> findByCertificacion(String certificacion);
+    powerSupply save(powerSupply powerSupply);
+    Optional<powerSupply> findByComponenteId(String componenteId);
 }

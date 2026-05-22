@@ -26,6 +26,13 @@ public class cpuController {
                 .body(CpuService.getAll());
     }
 
+    @PostMapping
+    public ResponseEntity<cpu> save(@Valid @RequestBody cpu cpu) {
+        return  ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(CpuService.save(cpu));
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<cpu> findById(@PathVariable Long id) {
         return ResponseEntity
