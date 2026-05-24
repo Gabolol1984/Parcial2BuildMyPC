@@ -41,4 +41,9 @@ public class powerSupply {
     @NotNull(message = "El campo de conectores no puede estar vacio")
     @Column(nullable = false)
     private Integer conectoresPcie;
+
+    @NotNull(message = "El campo de valor no puede estar vacio")
+    @Column(nullable = false)
+    private Integer valor;
+
 }

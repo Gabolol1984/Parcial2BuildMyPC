@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 @Data
 @NoArgsConstructor
-public class usuarioDTO {
+public class UsuarioRequestDTO {
     @NotBlank(message = "El nombre es obligatorio")
     @Size(max = 80, message = "El nombre no puede superar 80 caracteres")
     private String nombre;
@@ -30,6 +30,6 @@ public class usuarioDTO {
     @Size(max = 20, message = "El teléfono no puede superar 20 caracteres")
     private String telefono;
 
-    @NotBlank(message = "El rol funcional es obligatorio")
+    @NotBlank(message = "El rol funcional es obligatorio (USUARIO/TECNICO/ADMINSITRADOR)")
     private String rolFuncional;   // USUARIO, TECNICO, ADMINISTRADOR
 }

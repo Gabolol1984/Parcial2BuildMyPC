@@ -23,7 +23,6 @@ public class buildDto {
     private Long fuenteId;
     private Long usuarioId;
     private listDTO list;
-
     private EstadoBuild estado;
 
 

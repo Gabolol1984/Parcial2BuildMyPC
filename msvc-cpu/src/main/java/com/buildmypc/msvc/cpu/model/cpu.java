@@ -51,4 +51,8 @@ public class cpu {
     private Boolean soportaDdr4;
     private Boolean soportaDdr5;
 
+    @NotBlank
+    @Column(nullable = false)
+    private Integer precio;
+
 }

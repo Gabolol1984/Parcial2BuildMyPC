@@ -4,6 +4,7 @@ import com.buildmypc.msvc_build.dto.buildDto;
 import com.buildmypc.msvc_build.model.build;
 import com.buildmypc.msvc_build.service.buildService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/builds")
 @Validated
@@ -51,7 +53,7 @@ public class buildController {
     public ResponseEntity<build> cambiarEstado(
             @PathVariable Long id,
             @RequestParam String nuevoEstado) {
-        return ResponseEntity.ok(buildService.cambiarEstado(id, nuevoEstado));
+        return ResponseEntity.(buildService.cambiarEstado(id, nuevoEstado));
     }
 
 

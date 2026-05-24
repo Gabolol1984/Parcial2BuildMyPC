@@ -120,4 +120,9 @@ public class buildServicelmpl implements buildService {
         this.buildRepository.deleteById(id);
 
     }
+
+    @Override
+    public buildDto cambiarEstado(Long id, String nuevoEstado) {
+        return null;
+    }
 }
