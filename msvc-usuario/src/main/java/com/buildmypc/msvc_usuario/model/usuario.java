@@ -38,6 +38,7 @@ public class usuario {
     @Column(length = 20)
     private String telefono;
 
+    //roles disponibles
     @NotNull(message = "el rol no es valido")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
