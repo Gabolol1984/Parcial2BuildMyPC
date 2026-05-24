@@ -47,6 +47,12 @@ public class buildController {
         buildService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+    @PatchMapping("/{id}/estado")
+    public ResponseEntity<build> cambiarEstado(
+            @PathVariable Long id,
+            @RequestParam String nuevoEstado) {
+        return ResponseEntity.ok(buildService.cambiarEstado(id, nuevoEstado));
+    }
 
 
 }

@@ -11,13 +11,21 @@ import com.buildmypc.msvc_build.exception.buildException;
 import com.buildmypc.msvc_build.repository.buildRepository;
 import com.buildmypc.msvc_build.dto.buildDto;
 import com.buildmypc.msvc_build.model.build;
+import com.buildmypc.msvc_build.model.build.EstadoBuild;
 import feign.FeignException;
+import lombok.RequiredArgsConstructor;
+import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class buildServicelmpl implements buildService {
 
     @Autowired
@@ -31,6 +39,7 @@ public class buildServicelmpl implements buildService {
 
     @Autowired
     private gpuClient gpuClient;
+
 
     @Override
     public List<buildDto> findAll() {
