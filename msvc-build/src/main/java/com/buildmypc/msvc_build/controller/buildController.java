@@ -50,10 +50,11 @@ public class buildController {
         return ResponseEntity.noContent().build();
     }
     @PatchMapping("/{id}/estado")
-    public ResponseEntity<build> cambiarEstado(
+    public ResponseEntity<buildDto> cambiarEstado(
             @PathVariable Long id,
             @RequestParam String nuevoEstado) {
-        return ResponseEntity.(buildService.cambiarEstado(id, nuevoEstado));
+        return ResponseEntity.ok(
+                buildService.cambiarEstado(id, nuevoEstado));
     }
 
 
