@@ -1,15 +1,9 @@
 package com.buildmypc.msvc_build.service;
 
-import com.buildmypc.msvc_build.dto.usuarioDTO;
-import com.buildmypc.msvc_build.dto.cpuDTO;
-import com.buildmypc.msvc_build.dto.GpuDTO;
-import com.buildmypc.msvc_build.dto.listDTO;
-import com.buildmypc.msvc_build.client.cpuClient;
-import com.buildmypc.msvc_build.client.gpuClient;
-import com.buildmypc.msvc_build.client.usuarioClient;
+import com.buildmypc.msvc_build.client.*;
+import com.buildmypc.msvc_build.dto.*;
 import com.buildmypc.msvc_build.exception.buildException;
 import com.buildmypc.msvc_build.repository.buildRepository;
-import com.buildmypc.msvc_build.dto.buildDto;
 import com.buildmypc.msvc_build.model.build;
 import com.buildmypc.msvc_build.model.build.EstadoBuild;
 import feign.FeignException;
@@ -39,6 +33,15 @@ public class buildServicelmpl implements buildService {
 
     @Autowired
     private gpuClient gpuClient;
+
+    @Autowired
+    private MotherboardClient motherboardClient;
+
+    @Autowired
+    private ramClient ramClient;
+
+    @Autowired
+    private powersupplyClient powersupplyClient;
 
 
     @Override
@@ -79,21 +82,49 @@ public class buildServicelmpl implements buildService {
 
     @Override
     public build save(build build) {
+
         try{
-            usuarioDTO usuarioDTO = this.usuarioClient.getById(build.getUsuarioId());
+            usuarioDTO usuarioDTO =
+                    this.usuarioClient.getById(build.getUsuarioId());
         }catch (FeignException exception){
             throw new buildException("El usuario no existe");
         }
+
         try{
-            cpuDTO cpuDTO = this.cpuClient.getById(build.getCpuId());
+            cpuDTO cpuDTO =
+                    this.cpuClient.getById(build.getCpuId());
         }catch (FeignException exception){
             throw new buildException("El cpu no existe");
         }
-        try {
-            GpuDTO gpuDTO = this.gpuClient.getById(build.getGpuId());
+
+        try{
+            GpuDTO gpuDTO =
+                    this.gpuClient.getById(build.getGpuId());
         }catch (FeignException exception){
             throw new buildException("El gpu no existe");
         }
+
+        try{
+            motherboardDTO motherboardDTO =
+                    this.motherboardClient.getById(build.getMotherboardId());
+        }catch (FeignException exception){
+            throw new buildException("La motherboard no existe");
+        }
+
+        try{
+            ramDTO ramDTO =
+                    this.ramClient.getById(build.getRamId());
+        }catch (FeignException exception){
+            throw new buildException("La RAM no existe");
+        }
+
+        try{
+            powersupplyDTO powerSupplyDTO =
+                    this.powersupplyClient.getById(build.getFuenteId());
+        }catch (FeignException exception){
+            throw new buildException("La fuente de poder no existe");
+        }
+
         return this.buildRepository.save(build);
     }
 
