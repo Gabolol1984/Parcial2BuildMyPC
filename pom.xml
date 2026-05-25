@@ -21,9 +21,18 @@
 	<developers>
 		<developer/>
 	</developers>
-	<modules>
 
-	</modules>
+		<modules>
+			<module>msvc-build</module>
+			<module>msvc-component</module>
+			<module>msvc-cpu</module>
+			<module>msvc-gpu</module>
+			<module>msvc-motherboard</module>
+			<module>msvc-powerSupply</module>
+			<module>msvc-quotation</module>
+			<module>msvc-ram</module>
+			<module>msvc-usuario</module>
+		</modules>
 	<scm>
 		<connection/>
 		<developerConnection/>
