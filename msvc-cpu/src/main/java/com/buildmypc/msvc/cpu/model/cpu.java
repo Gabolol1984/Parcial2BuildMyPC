@@ -2,6 +2,7 @@ package com.buildmypc.msvc.cpu.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Entity
@@ -29,15 +30,15 @@ public class cpu {
     @Column(nullable = false)
     private String socket;           // Ej: AM5, LGA1700
 
-    @NotBlank(message = "El campo de nucleos no puede estar vacio")
+    @NotNull(message = "El campo de nucleos no puede estar vacio")
     @Column(nullable = false)
     private Integer nucleos;
 
-    @NotBlank(message = "El campo de hilos no puede estar vacio")
+    @NotNull(message = "El campo de hilos no puede estar vacio")
     @Column(nullable = false)
     private Integer hilos;
 
-    @NotBlank(message = "El campo de las frecuencias no puede estar vacio")
+    @NotNull(message = "El campo de las frecuencias no puede estar vacio")
     @Column(nullable = false)
     private Double frecuenciaBase;   // GH
 
@@ -51,7 +52,7 @@ public class cpu {
     private Boolean soportaDdr4;
     private Boolean soportaDdr5;
 
-    @NotBlank
+    @NotNull
     @Column(nullable = false)
     private Integer precio;
 
