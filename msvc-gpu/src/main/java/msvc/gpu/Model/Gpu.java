@@ -1,5 +1,6 @@
 package msvc.gpu.Model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -21,7 +22,7 @@ public class Gpu {
     @NotBlank(message = "El modelo es obligatorio")
     private String modelo;
 
-    @NotNull @Min(1)
+    @NotNull @Positive
     @Column(name = "precio_base")
     private Double precioBase;
 

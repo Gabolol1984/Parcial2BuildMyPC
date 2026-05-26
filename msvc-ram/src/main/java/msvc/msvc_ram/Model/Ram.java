@@ -29,7 +29,7 @@ public class Ram {
     private String modelo;
 
     @NotNull(message = "El precio base es obligatorio")
-    @Min(value = 1, message = "El precio debe ser mayor que cero")
+    @Positive(message = "El precio debe ser mayor que cero")
     @Column(name = "precio_base")
     private Double precioBase;
 
@@ -53,11 +53,11 @@ public class Ram {
     private String latenciaCl;
 
     @NotNull(message = "La cantidad de módulos es obligatoria")
-    @Min(1)
+    @Positive(message = "La cantidad de modulos debe ser mayor que cero")
     private Integer modulos;
 
     @NotNull(message = "El voltaje es obligatorio")
-    @Min(1)
+    @Positive(message = "El voltaje debe ser mayor que cero")
     private Double voltaje;
 
     @NotNull(message = "Debe indicar si está activo")

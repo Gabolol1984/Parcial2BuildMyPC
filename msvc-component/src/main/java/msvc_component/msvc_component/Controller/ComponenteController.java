@@ -11,7 +11,7 @@ import msvc_component.msvc_component.Service.ComponenteService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/componentes")
+@RequestMapping("/api/v1/componentes")
 public class ComponenteController {
     @Autowired
     private ComponenteService componenteService;
@@ -19,14 +19,14 @@ public class ComponenteController {
     @Transactional(readOnly = true)
     @GetMapping
     public List<Componente> findAll() {
-        // Consistente con MedicoService.findAll()
+
         return this.componenteService.findAll();
     }
 
     @Transactional(readOnly = true)
     @GetMapping("/{id}")
     public ResponseEntity<Componente> findById(@PathVariable Long id) {
-        // Consistente con MedicoService.findById()
+
         return ResponseEntity.ok(this.componenteService.findById(id));
     }
 
