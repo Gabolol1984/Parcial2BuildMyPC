@@ -20,7 +20,7 @@ public class build {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "El ID de usuario es obligatorio")
+    @NotNull(message = "El ID de usuario es obligatorio")
     @Column(nullable = false)
     private Long usuarioId;
 
@@ -30,7 +30,7 @@ public class build {
     private Long ramId;
     private Long fuenteId;
 
-    @NotBlank(message = "El estado de la build no puede estar vacío")
+    @NotNull(message = "El estado de la build no puede estar vacío")
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private EstadoBuild estado;
