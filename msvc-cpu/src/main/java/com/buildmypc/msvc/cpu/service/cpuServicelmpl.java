@@ -18,7 +18,7 @@ public class cpuServicelmpl implements cpuService {
     @Transactional
     @Override
     public cpu save(cpu cpu) {
-        if (this.cpuRepository.findByName(cpu.getCpuName()).isPresent()) {
+        if (this.cpuRepository.findBycpuName(cpu.getCpuName()).isPresent()) {
             throw new cpuException("cpu existente");
         }
         return this.cpuRepository.save(cpu);
