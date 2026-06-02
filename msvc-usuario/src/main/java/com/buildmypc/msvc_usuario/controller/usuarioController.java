@@ -4,8 +4,14 @@ import com.buildmypc.msvc_usuario.dto.UsuarioRequestDTO;
 import com.buildmypc.msvc_usuario.dto.UsuarioResponseDTO;
 import com.buildmypc.msvc_usuario.model.Usuario;
 import com.buildmypc.msvc_usuario.service.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,13 +22,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/usuarios")
 @Validated
-@RequiredArgsConstructor
+@Tag(name="Usuarios V1", description = "Metodos CRUD para la gestion de usuarios")
 public class usuarioController {
 
-    private final UsuarioService usuarioService;
+    @Autowired
+    private UsuarioService usuarioService;
 
     // POST /api/usuarios
     @PostMapping
+    @Operation(summary = "Agregar un Usuario", description = "crea y Agrega un nuevo usuario")
     public ResponseEntity<UsuarioResponseDTO> crear(
             @Valid @RequestBody UsuarioRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -31,13 +39,19 @@ public class usuarioController {
 
     // GET /api/usuarios
     @GetMapping
+    @Operation(summary = "Listar todos los usuarios", description = "Muestra todos los usuarios creados")
+    @ApiResponse(responseCode = "200",description = "Operacion exitosa",
+                content = @Content(mediaType = "application/json"))
     public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 
     // GET /api/usuarios/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioResponseDTO> buscarPorId(@PathVariable Long id) {
+    @Operation(summary = "Buscar usuario por id", description = "Muestra un usuario con el ID especifico")
+    public ResponseEntity<UsuarioResponseDTO> buscarPorId(
+            @Parameter(description = "Id del usuario a buscar")
+            @PathVariable Long id) {
         return ResponseEntity.ok(usuarioService.buscarPorId(id));
     }
 
