@@ -1,14 +1,14 @@
 package msvc.msvc_ram.Controller;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import msvc.msvc_ram.Dto.RamDTO;
 import msvc.msvc_ram.Model.Ram;
 import msvc.msvc_ram.Service.RamService;
+import msvc.msvc_ram.assemblers.RamModelAssembler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -17,34 +17,45 @@ import jakarta.validation.Valid;
 
 import java.util.List;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+
 @RestController
-@RequestMapping("/api/v1/ram")
+@RequestMapping("/api/v2/ram")
 @RequiredArgsConstructor
 @Validated
-@Tag(name="RamV1", description = "Metodos CRUD para la gestion de Ram")
+//anotacion tag
+@Tag()
 public class RamController {
 
 
-    private final RamService service;
+    @Autowired
+    private  RamService service;
+
+
+    @Autowired
+
 
     @GetMapping
-    @Operation(summary = "Listar todas las ram", description = "Muestra todas las ram creados")
-    @ApiResponse(responseCode = "200",description = "Operacion exitosa",
-            content = @Content(mediaType = "application/json"))
-    public ResponseEntity<List<Ram>> findAll() {
+    //altero findall
+    public ResponseEntity<CollectionModel<EntityModel<Ram>>> findAll() {
+        List<EntityModel<Ram>> entityModels = this.service.findAll()
+                .stream()
+                .map(RamModelAssembler::toModel)
+                .toList();
+        CollectionModel<EntityModel<Ram>> collectionModel = CollectionModel.of(
+                entityModels,
+                linkTo()
+        );
+
         return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Buscar usuario por id", description = "Muestra una ram con el ID especifico")
-    public ResponseEntity<Ram> findById(
-            @Parameter(description = "Id de la ram a buscar")
-            @PathVariable Long id) {
+    public ResponseEntity<Ram> findById(@PathVariable Long id) {
         return ResponseEntity.ok(service.findById(id));
     }
 
     @PostMapping
-    @Operation(summary = "Agregar una ram", description = "crea y Agrega una nueva ram")
     public ResponseEntity<Ram> save(@Valid @RequestBody RamDTO ram) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(ram));
     }
