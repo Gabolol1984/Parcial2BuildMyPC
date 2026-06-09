@@ -48,7 +48,7 @@ public class Usuario {
     @Column(nullable = false)
     private EstadoUsuario estado;
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = true, updatable = false)
     private LocalDateTime fechaRegistro;
 
     @PrePersist
