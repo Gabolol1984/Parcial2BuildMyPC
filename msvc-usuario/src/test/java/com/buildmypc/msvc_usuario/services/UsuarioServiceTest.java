@@ -1,6 +1,6 @@
 package com.buildmypc.msvc_usuario.services;
 
-
+import com.buildmypc.msvc_usuario.exception.ServiceException;
 import com.buildmypc.msvc_usuario.dto.UsuarioResponseDTO;
 import com.buildmypc.msvc_usuario.model.Usuario;
 import com.buildmypc.msvc_usuario.service.usuarioServicelmpl;
@@ -18,8 +18,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -47,7 +49,6 @@ public class UsuarioServiceTest {
         Faker faker = new Faker(Locale.of("es","CL"));
         for (int i = 0; 1< 100; i++){
             Usuario usuario = new Usuario();
-
             usuarioList.add(usuario);
         }
 
@@ -62,12 +63,26 @@ public class UsuarioServiceTest {
         when(this.usuarioRepository.findAll()).thenReturn(usuarios);
 
         //ACT
-        List<UsuarioResponseDTO> result = this.usuarioService.listarTodos();
+        List<Usuario> result = this.usuarioService.listarTodos();
 
         //ASSERT
         assertThat(result).hasSize(101);
         assertThat(result).contains(usuarioPrueba);
-        verify(usuarioRepository, times(1)).listarTodos();
+        verify(usuarioRepository, times(1)).findAll();
+
+    }
+
+    @Test
+    @DisplayName("Debe bsucar un usuario con un id inexistente")
+    public void shouldNotFindMedicoById(){
+        Long id = 9999L;
+        when(this.usuarioRepository.findById(id)).thenReturn(Optional.empty());
+
+        assertThatThrownBy(()->{
+            this.usuarioService.buscarPorId(id);
+        }).isInstanceOf(ServiceException.class)
+                .hasMessage("Usuario no encontrado con id: " + id);
+        verify(usuarioRepository, times(1)).findById(id);
 
     }
 }
