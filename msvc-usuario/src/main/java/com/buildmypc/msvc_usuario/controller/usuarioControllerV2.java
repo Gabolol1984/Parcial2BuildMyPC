@@ -63,12 +63,10 @@ public class usuarioControllerV2 {
     // GET /api/usuarios/{id}
     @GetMapping("/{id}")
     @Operation(summary = "Buscar usuario por id", description = "Muestra un usuario con el ID especifico")
-    public ResponseEntity<EntityModel<Usuario>> buscarPorId(
+    public ResponseEntity<Usuario> buscarPorId(
             @Parameter(description = "Id del usuario a buscar")
             @PathVariable Long id) {
-        EntityModel<Usuario> entityModel = this.usuarioModelAssembler.toModel(
-                this.usuarioService.buscarPorId()
-        )
+
         return ResponseEntity.ok(usuarioService.buscarPorId(id));
     }
 

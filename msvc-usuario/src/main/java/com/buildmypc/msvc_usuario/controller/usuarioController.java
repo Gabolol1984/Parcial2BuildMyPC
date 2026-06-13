@@ -42,7 +42,7 @@ public class usuarioController {
     @Operation(summary = "Listar todos los usuarios", description = "Muestra todos los usuarios creados")
     @ApiResponse(responseCode = "200",description = "Operacion exitosa",
                 content = @Content(mediaType = "application/json"))
-    public ResponseEntity<List<UsuarioResponseDTO>> listarTodos() {
+    public ResponseEntity<List<Usuario>> listarTodos() {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 

@@ -51,11 +51,11 @@ public class usuarioServicelmpl implements UsuarioService {
         return toDTO(guardado);
     }
 
+    @Transactional(readOnly = true)
     @Override
-    public List<UsuarioResponseDTO> listarTodos() {
+    public List<Usuario> listarTodos() {
         log.info("Listando todos los usuarios");
-        return usuarioRepository.findAll()
-                .stream().map(this::toDTO).collect(Collectors.toList());
+        return usuarioRepository.findAll();
     }
 
     @Override
