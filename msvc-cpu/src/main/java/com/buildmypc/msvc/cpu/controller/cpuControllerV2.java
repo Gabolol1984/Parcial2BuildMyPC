@@ -1,5 +1,6 @@
 package com.buildmypc.msvc.cpu.controller;
 
+
 import com.buildmypc.msvc.cpu.model.cpu;
 import com.buildmypc.msvc.cpu.service.cpuService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -13,10 +14,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/cpus")
+@RequestMapping("/api/v2/cpus")
 @Validated
-@Tag(name = "cpusV1", description = "Metodos CRUD para la gestión de atenciones")
-public class cpuController {
+@Tag(name = "cpusV2", description = "Metodos CRUD HATEOAS para la gestión de cpus")
+public class cpuControllerV2 {
 
     @Autowired
     private cpuService CpuService;

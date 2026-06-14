@@ -1,6 +1,8 @@
 package msvc.gpu.Controller;
 
+
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import msvc.gpu.Dto.GpuDTO;
 import msvc.gpu.Model.Gpu;
 import msvc.gpu.Service.GpuService;
@@ -8,18 +10,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import jakarta.validation.Valid;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/gpu")
+@RequestMapping("/api/v2/gpu")
 @Validated
-@Tag(name = "GpusV1", description = "Metodos CRUD para la gestión de gpus")
-public class GpuController {
+@Tag(name = "GpusV2", description = "Metodos CRUD HATEOAS para la gestión de gpus")
+public class GpuControllerV2 {
 
     private final GpuService service;
 
-    public GpuController(GpuService s) {
+    public GpuControllerV2(GpuService s) {
         this.service = s;
     }
 
