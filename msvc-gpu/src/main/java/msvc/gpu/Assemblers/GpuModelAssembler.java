@@ -24,7 +24,7 @@ public class GpuModelAssembler
                 linkTo(methodOn(GpuControllerV2.class)
                         .findAll()).withRel("gpus"),
 
-                //////pendiente (?)
+                // Enlace para registrar una nueva GPU
                 linkTo(methodOn(GpuControllerV2.class)
                         .create(null)).withRel("crear"),
 

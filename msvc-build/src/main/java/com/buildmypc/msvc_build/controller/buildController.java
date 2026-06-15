@@ -3,6 +3,7 @@ package com.buildmypc.msvc_build.controller;
 import com.buildmypc.msvc_build.dto.buildDto;
 import com.buildmypc.msvc_build.model.build;
 import com.buildmypc.msvc_build.service.buildService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/builds")
 @Validated
+@Tag(name = "buildV1", description = "Metodos CRUD para la gestión de builds")
 public class buildController {
 
     @Autowired
