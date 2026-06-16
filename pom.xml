@@ -33,6 +33,8 @@
 			<module>msvc-quotation</module>
 			<module>msvc-ram</module>
 			<module>msvc-usuario</module>
+			<module>msvc-gateway</module>
+			<module>msvc-eureka</module>
 		</modules>
 	<scm>
 		<connection/>
