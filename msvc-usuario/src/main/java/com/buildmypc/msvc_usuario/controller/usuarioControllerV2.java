@@ -38,7 +38,7 @@ public class usuarioControllerV2 {
     @Operation(summary = "Agregar un Usuario", description = "crea y Agrega un nuevo usuario")
     public ResponseEntity<UsuarioResponseDTO> crear(
             @Valid @RequestBody UsuarioRequestDTO dto) {
-        Usuario usuarioCreate
+        Usuario usuarioCreate;
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(usuarioService.crear(dto));
     }
