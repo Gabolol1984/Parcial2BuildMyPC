@@ -28,7 +28,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/builds")
+@RequestMapping("/api/v2/builds")
 @Validated
 @Tag(name = "buildV2", description = "Metodos CRUD HATEOAS para la gestión de builds")
 
