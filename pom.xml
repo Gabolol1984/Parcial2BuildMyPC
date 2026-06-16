@@ -23,6 +23,7 @@
 	</developers>
 
 		<modules>
+
 			<module>msvc-build</module>
 			<module>msvc-component</module>
 			<module>msvc-cpu</module>
