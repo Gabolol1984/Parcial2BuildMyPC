@@ -6,8 +6,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
+
 @Data
 @Table(name = "motherboard")
+@Entity
 public class Motherboard {
     @Id @GeneratedValue
     private Long id;

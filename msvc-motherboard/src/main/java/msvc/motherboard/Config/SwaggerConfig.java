@@ -12,7 +12,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenApi() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("API Motherboard")
+                        .title("API de Motherboards")
                         .version("1.0")
                         .description("Documentacion de la API de gestion de Motherboard")
                 );
