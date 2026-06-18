@@ -1,5 +1,6 @@
 package com.buildmypc.msvc_usuario.controller;
 
+import com.buildmypc.msvc_usuario.assemblers.UsuarioModelAssembler;
 import com.buildmypc.msvc_usuario.dto.UsuarioRequestDTO;
 import com.buildmypc.msvc_usuario.dto.UsuarioResponseDTO;
 import com.buildmypc.msvc_usuario.model.Usuario;
@@ -27,6 +28,9 @@ public class usuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private UsuarioModelAssembler usuarioModelAssembler;
 
     // POST /api/usuarios
     @PostMapping

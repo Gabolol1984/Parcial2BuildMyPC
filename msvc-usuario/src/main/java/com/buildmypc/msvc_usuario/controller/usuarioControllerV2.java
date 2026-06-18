@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 import java.util.List;
 
@@ -53,21 +54,28 @@ public class usuarioControllerV2 {
                 .stream()
                 .map(usuarioModelAssembler::toModel)
                 .toList();
-        CollectionModel<EntityModel<Usuario>>=CollectionModel.of(
+        CollectionModel<EntityModel<Usuario>>collectionModel = CollectionModel.of(
                 entityModels,
+                linkTo(methodOn(usuarioControllerV2.class).listarTodos()).withSelfRel()
 
-        )
-        return ResponseEntity.ok(usuarioService.listarTodos());
+        );
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(collectionModel);
     }
 
     // GET /api/usuarios/{id}
     @GetMapping("/{id}")
     @Operation(summary = "Buscar usuario por id", description = "Muestra un usuario con el ID especifico")
-    public ResponseEntity<Usuario> buscarPorId(
+    public ResponseEntity<EntityModel<Usuario>> buscarPorId(
             @Parameter(description = "Id del usuario a buscar")
             @PathVariable Long id) {
 
-        return ResponseEntity.ok(usuarioService.buscarPorId(id));
+        // Buscar el medico y pedirle al assembler que le agregue los enlaces.
+        EntityModel<Usuario> entityModel = this.usuarioModelAssembler.toModel(
+                this.usuarioService.buscarPorId(id)
+        );
+        return ResponseEntity.ok(entityModel);
     }
 
     // GET /api/usuarios/email?email=juan@mail.com
