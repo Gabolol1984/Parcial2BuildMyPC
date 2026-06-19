@@ -93,4 +93,4 @@ springdoc:
 
 # CLAVE SECRETA JWT: la MISMA que en msvc-usuarios y en los 3 microservicios. El gateway la usa para validar.
 jwt:
-  secret: clave-secreta-super-segura-para-jwt-hospital-msvc-duoc-2026-0616
+  secret: cambie-la-clave-porque-el-profe-nos-pidio-que-la-cambiaramos-2026

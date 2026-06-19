@@ -1,9 +1,8 @@
-package msvc.msvc_ram.config;
+package com.buildmypc.msvc_usuario.config;
 
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,20 +10,18 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
 
-    private static final String ESQUEMA = "bearer-jwt";
-
     @Bean
     public OpenAPI customOpenApi() {
+        // Registra el esquema "bearer-jwt": agrega el boton Authorize en Swagger para pegar el token.
         return new OpenAPI()
                 .info(new Info()
-                        .title("API Ram")
+                        .title("API Usuarios / Auth")
                         .version("1.0")
-                        .description("Documentacion de la API de gestion de Ram"))
-                .components(new Components().addSecuritySchemes(ESQUEMA,
+                        .description("Registro, login y emision de JWT"))
+                .components(new Components().addSecuritySchemes("bearer-jwt",
                         new SecurityScheme()
                                 .type(SecurityScheme.Type.HTTP)
                                 .scheme("bearer")
-                                .bearerFormat("JWT")))
-                .addSecurityItem(new SecurityRequirement().addList(ESQUEMA));
+                                .bearerFormat("JWT")));
     }
 }
