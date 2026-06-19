@@ -1,0 +1,27 @@
+package com.buildmypc.msvc_usuario.models;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+// Tabla de roles. El nombre se guarda con el prefijo ROLE_ (convencion de Spring Security):
+// ROLE_ADMIN, ROLE_TECNICO, ROLE_USUARIO.
+@Entity
+@Table(name = "roles")
+@Getter
+@Setter
+@NoArgsConstructor
+public class Rol {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "rol_id")
+    private Long rolId;
+
+    @Column(unique = true, nullable = false)
+    private String nombre;
+
+    public Rol(String nombre) {
+        this.nombre = nombre;
+    }
+}

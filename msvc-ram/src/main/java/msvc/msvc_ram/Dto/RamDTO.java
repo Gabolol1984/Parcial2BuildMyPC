@@ -1,5 +1,7 @@
 package msvc.msvc_ram.Dto;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -9,6 +11,7 @@ import java.time.LocalDate;
 
 @Data
 public class RamDTO {
+
     private Long id;
 
     @NotBlank(message = "El tipo de componente no puede ser vacio")
