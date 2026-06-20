@@ -10,7 +10,6 @@ public interface buildService {
     build save(build build);
     build updateById(build build,Long id);
     void deleteById(Long id);
-    // Cambia el estado de la build (usado por compatibility-service y quotation-service)
     buildDto cambiarEstado(Long id, String nuevoEstado);
 
 }

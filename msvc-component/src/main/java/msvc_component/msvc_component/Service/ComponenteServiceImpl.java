@@ -31,10 +31,13 @@ public class ComponenteServiceImpl implements ComponenteService {
     @Transactional(readOnly = true)
     @Override
     public Componente findByTipo(String tipo) {
-        // Asumiendo que el repositorio devuelve un Optional<Componente>
-        return this.componenteRepository.findByTipo(tipo).stream().findFirst().orElseThrow(
-                () -> new ComponenteException("No existen componentes del tipo: " + tipo)
-        );
+
+        return this.componenteRepository.findByTipo(tipo)
+                .orElseThrow(
+                        () -> new ComponenteException(
+                                "No existen componentes del tipo: " + tipo
+                        )
+                );
     }
 
     @Transactional
