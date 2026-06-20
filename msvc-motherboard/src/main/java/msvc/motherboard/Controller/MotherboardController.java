@@ -100,13 +100,8 @@ public class MotherboardController {
             @Parameter(description = "Id del motherboard a buscar", required = true, example = "1")
             @PathVariable Long id
     ) {
-        // 1. Buscar la motherboard en el servicio
         Motherboard motherboard = service.getById(id);
-
-        // 2. Pasar la entidad al assembler para que le agregue los links hipermedios (HATEOAS)
         EntityModel<Motherboard> entityModel = this.motherboardModelAssembler.toModel(motherboard);
-
-        // 3. Retornar el EntityModel envuelto en el ResponseEntity
         return ResponseEntity.ok(entityModel);}
 
 

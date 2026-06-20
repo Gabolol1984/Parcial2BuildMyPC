@@ -8,63 +8,114 @@ spring:
           # Cada ruta: si la URL entra por el patron 'predicates', el gateway la reenvia
           # a 'uri'. lb:// significa "busca este nombre en Eureka y balancea la carga".
           routes:
-            - id: msvc-build
-              uri: lb://msvc-build
-              predicates:
-                - Path=/api/v1/builds/**,/api/v2/builds/**
-            - id: msvc-component
-              uri: lb://msvc-component
-              predicates:
-                - Path=/api/v1/componentes/**,/api/v2/component/**
-            - id: msvc-cpu
-              uri: lb://msvc-cpu
-              predicates:
-                - Path=/api/v1/cpus/**,/api/v2/cpus/**
-            - id: msvc-gpu
-              uri: lb://msvc-gpu
-              predicates:
-                - Path=/api/v1/gpu/**,/api/v2/gpu/**
-            - id: msvc-motherboard
-              uri: lb://msvc-motherboard
-              predicates:
-                - Path=/api/v1/motherboard/**,/api/v2/motherboard/**
-            - id: msvc-powerSupply
-              uri: lb://msvc-powerSupply
-              predicates:
-                - Path=/api/v1/powerSupply/**,/api/v2/powerSupply/**
-            - id: msvc-quotation
-              uri: lb://msvc-quotation
-              predicates:
-                - Path=/api/v1/cotizaciones/**,/api/v2/cotizaciones/**
-            - id: msvc-ram
-              uri: lb://msvc-ram
-              predicates:
-                - Path=/api/v1/ram/**,/api/v2/ram/**
-            - id: msvc-usuario
-              uri: lb://msvc-usuario
-              predicates:
-                - Path=/api/v1/usuarios/**,/api/v2/usuarios/**
-                -
+          - id: msvc-cpu
+            uri: lb://msvc-cpu
+            predicates:
+                - Path=/api/v2/cpus/**
+
+          - id: msvc-gpu
+            uri: lb://msvc-gpu
+            predicates:
+              - Path=/api/v2/gpu/**
+
+          - id: msvc-ram
+            uri: lb://msvc-ram
+            predicates:
+              - Path=/api/v2/ram/**
+
+          - id: msvc-motherboard
+            uri: lb://msvc-motherboard
+            predicates:
+              - Path=/api/v1/motherboards/**
+
+          - id: msvc-powersupply
+            uri: lb://msvc-powersupply
+            predicates:
+              - Path=/api/v2/psus/**
+
+          - id: msvc-component
+            uri: lb://msvc-component
+            predicates:
+              - Path=/api/v1/componentes/**
+
+          - id: msvc-quotation
+            uri: lb://msvc-quotation
+            predicates:
+              - Path=/api/v1/cotizaciones/**
+
+          - id: msvc-build
+            uri: lb://msvc-build
+            predicates:
+              - Path=/api/v1/builds/**,/api/v2/builds
+
+          - id: msvc-usuario
+            uri: lb://msvc-usuario
+            predicates:
+              - Path=/api/v1/auth/**,/api/v1/usuarios/**
           # las consume. Usan el prefijo /api-docs/<svc> (NO /v3/api-docs) para no chocar con
             # el /v3/api-docs propio del gateway. RewritePath lo traduce al /v3/api-docs real del servicio.
-            - id: build-api-docs
-              uri: lb://msvc-build
-              predicates:
+          - id: cpu-api-docs
+            uri: lb://msvc-cpu
+            predicates:
+                  - Path=/api-docs/cpu
+            filters:
+                  - RewritePath=/api-docs/cpu, /v3/api-docs
+
+          - id: gpu-api-docs
+            uri: lb://msvc-gpu
+            predicates:
+                - Path=/api-docs/gpu
+            filters:
+                - RewritePath=/api-docs/gpu, /v3/api-docs
+
+          - id: ram-api-docs
+            uri: lb://msvc-ram
+            predicates:
+                - Path=/api-docs/ram
+            filters:
+                - RewritePath=/api-docs/ram, /v3/api-docs
+
+          - id: motherboard-api-docs
+            uri: lb://msvc-motherboard
+            predicates:
+                - Path=/api-docs/motherboard
+            filters:
+                - RewritePath=/api-docs/motherboard, /v3/api-docs
+
+          - id: powersupply-api-docs
+            uri: lb://msvc-powersupply
+            predicates:
+                - Path=/api-docs/powersupply
+            filters:
+                - RewritePath=/api-docs/powersupply, /v3/api-docs
+
+          - id: component-api-docs
+            uri: lb://msvc-component
+            predicates:
+                - Path=/api-docs/component
+            filters:
+                - RewritePath=/api-docs/component, /v3/api-docs
+
+          - id: quotation-api-docs
+            uri: lb://msvc-quotation
+            predicates:
+                - Path=/api-docs/quotation
+            filters:
+                - RewritePath=/api-docs/quotation, /v3/api-docs
+
+          - id: build-api-docs
+            uri: lb://msvc-build
+            predicates:
                 - Path=/api-docs/build
-              filters:
+            filters:
                 - RewritePath=/api-docs/build, /v3/api-docs
-            - id: pacientes-api-docs
-              uri: lb://msvc-pacientes
-              predicates:
-                - Path=/api-docs/pacientes
-              filters:
-                - RewritePath=/api-docs/pacientes, /v3/api-docs
-            - id: atenciones-api-docs
-              uri: lb://msvc-atenciones
-              predicates:
-                - Path=/api-docs/atenciones
-              filters:
-                - RewritePath=/api-docs/atenciones, /v3/api-docs
+
+          - id: usuario-api-docs
+            uri: lb://msvc-usuario
+            predicates:
+                - Path=/api-docs/usuario
+            filters:
+                - RewritePath=/api-docs/usuario, /v3/api-docs
 
 # Punto de entrada unico: todo el trafico entra por aqui.
 server:
@@ -83,12 +134,27 @@ springdoc:
     path: /docs/swagger-ui.html
     # El desplegable apunta a los docs de cada servicio (ruteados por el gateway via lb://).
     urls:
-      - name: medicos
-        url: /api-docs/medicos
-      - name: pacientes
-        url: /api-docs/pacientes
-      - name: atenciones
-        url: /api-docs/atenciones
+      - name: usuarios
+        url: /api-docs/usuario
+      - name: cpu
+        url: /api-docs/cpu
+      - name: gpu
+        url: /api-docs/gpu
+      - name: ram
+        url: /api-docs/ram
+      - name: motherboard
+        url: /api-docs/motherboard
+      - name: powersupply
+        url: /api-docs/powersupply
+      - name: componentes
+        url: /api-docs/component
+      - name: cotizaciones
+        url: /api-docs/quotation
+      - name: builds
+        url: /api-docs/build
+
+
+
 
 
 # CLAVE SECRETA JWT: la MISMA que en msvc-usuarios y en los 3 microservicios. El gateway la usa para validar.

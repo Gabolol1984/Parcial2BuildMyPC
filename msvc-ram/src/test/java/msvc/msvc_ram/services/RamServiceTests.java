@@ -29,7 +29,6 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 public class RamServiceTests {
 
-    /// palfindbycompponenteid
     @Mock
     private RamRepository ramRepository;
 

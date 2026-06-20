@@ -30,9 +30,6 @@ public class RamControllerV2 {
     @Autowired  // O usa @RequiredArgsConstructor si usas Lombok
     private RamService service;
 
-
-
-
     @GetMapping
     @Operation(summary = "Listar todas las RAMs",
             description = "Muestra todas las RAMs creadas")

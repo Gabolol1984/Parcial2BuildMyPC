@@ -35,19 +35,16 @@ public class CotizacionServiceImpl implements CotizacionService {
     private final BuildClient buildClient;
     private final ComponenteClient componenteClient;
 
-    // ─────────────────────────────────────────────────
-    // CREAR cotización — flujo principal del negocio
-    // ─────────────────────────────────────────────────
     @Override
     @Transactional
     public CotizacionResponseDTO crear(CotizacionRequestDTO dto) {
         log.info("Creando cotización para buildId={}, usuarioId={}",
                 dto.getBuildId(), dto.getUsuarioId());
 
-        // Regla: consulta la build en build-service
+        // consulta la build en build-service
         BuildDTO build = buildClient.getBuildById(dto.getBuildId());
 
-        // Regla: no se puede cotizar una build incompatible o incompleta
+        // no se puede cotizar una build incompatible o incompleta
         if (Boolean.FALSE.equals(build.getCompleta())) {
             throw new ServiceException(
                     "No se puede cotizar una build incompleta. Faltan componentes.");
@@ -62,7 +59,7 @@ public class CotizacionServiceImpl implements CotizacionService {
                             + "Estado actual: " + build.getEstado());
         }
 
-        // Regla: no puede haber dos cotizaciones activas para la misma build
+        //no puede haber dos cotizaciones activas para la misma build
         cotizacionRepository.findByBuildId(dto.getBuildId()).ifPresent(c -> {
             if (c.getEstado() == EstadoCotizacion.PENDIENTE) {
                 throw new ServiceException(
@@ -117,10 +114,6 @@ public class CotizacionServiceImpl implements CotizacionService {
 
         return toDTO(guardada, detalles);
     }
-
-    // ─────────────────────────────────────────────────
-    // CRUD base
-    // ─────────────────────────────────────────────────
     @Override
     public List<CotizacionResponseDTO> listarTodas() {
         log.info("Listando todas las cotizaciones");
@@ -162,9 +155,6 @@ public class CotizacionServiceImpl implements CotizacionService {
         return toDTO(c, detalleRepository.findByCotizacionId(c.getId()));
     }
 
-    // ─────────────────────────────────────────────────
-    // APROBAR cotización
-    // ─────────────────────────────────────────────────
     @Override
     @Transactional
     public CotizacionResponseDTO aprobar(Long id) {
@@ -188,9 +178,6 @@ public class CotizacionServiceImpl implements CotizacionService {
         return toDTO(actualizada, detalleRepository.findByCotizacionId(id));
     }
 
-    // ─────────────────────────────────────────────────
-    // RECHAZAR cotización
-    // ─────────────────────────────────────────────────
     @Override
     @Transactional
     public CotizacionResponseDTO rechazar(Long id) {
@@ -210,10 +197,6 @@ public class CotizacionServiceImpl implements CotizacionService {
         return toDTO(actualizada, detalleRepository.findByCotizacionId(id));
     }
 
-    // ─────────────────────────────────────────────────
-    // TAREA PROGRAMADA: vence cotizaciones expiradas
-    // Se ejecuta todos los días a las 00:00
-    // ─────────────────────────────────────────────────
     @Override
     @Scheduled(cron = "0 0 0 * * *")
     @Transactional
@@ -234,14 +217,7 @@ public class CotizacionServiceImpl implements CotizacionService {
         log.info("Total cotizaciones vencidas procesadas: {}", vencidas.size());
     }
 
-    // ─────────────────────────────────────────────────
-    // Helpers privados
-    // ─────────────────────────────────────────────────
 
-    /**
-     * Consulta component-service y construye un DetalleCotizacion.
-     * Retorna lista para poder usar addAll() fácilmente.
-     */
     private List<DetalleCotizacion> agregarDetalle(Long componenteId, String tipoFallback) {
         if (componenteId == null) return List.of();
 
