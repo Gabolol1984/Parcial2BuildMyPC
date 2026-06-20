@@ -31,7 +31,7 @@ spring:
           - id: msvc-powersupply
             uri: lb://msvc-powersupply
             predicates:
-              - Path=/api/v2/psus/**
+              - Path=/api/v2/psus/**,/api/v1/psus/**
 
           - id: msvc-component
             uri: lb://msvc-component
@@ -46,7 +46,7 @@ spring:
           - id: msvc-build
             uri: lb://msvc-build
             predicates:
-              - Path=/api/v1/builds/**,/api/v2/builds
+              - Path=/api/v1/builds/**,/api/v2/builds**
 
           - id: msvc-usuario
             uri: lb://msvc-usuario
