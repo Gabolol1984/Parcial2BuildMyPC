@@ -1,5 +1,11 @@
 package com.hospital.msvc_gateway.security;
 
+
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.security.config.Customizer;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -51,22 +57,77 @@ public class SecurityConfig {
         return converter;
     }
 
+
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationConverter converter) throws Exception {
+    public CorsConfigurationSource corsConfigurationSource() {
+
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        // Dirección donde se ejecuta nuestro frontend React con Vite.
+        configuration.setAllowedOrigins(
+                List.of("http://localhost:5173")
+        );
+
+        // Métodos HTTP que podrá utilizar React.
+        configuration.setAllowedMethods(
+                List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+        );
+
+        // Cabeceras que React podrá enviar, incluido nuestro JWT.
+        configuration.setAllowedHeaders(
+                List.of("Authorization", "Content-Type", "Accept")
+        );
+
+        // No utilizamos cookies: enviaremos el JWT mediante Authorization.
+        configuration.setAllowCredentials(false);
+
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
+
+        source.registerCorsConfiguration("/**", configuration);
+
+        return source;
+    }
+    @Bean
+    public SecurityFilterChain filterChain(
+            HttpSecurity http,
+            JwtAuthenticationConverter converter
+    ) throws Exception {
+
         http
-                // API sin estado: el token viaja en cada request, no hay formularios con sesion. CSRF off.
+                // Activa CORS para permitir las peticiones del frontend.
+                .cors(Customizer.withDefaults())
+
+                // API sin estado.
                 .csrf(csrf -> csrf.disable())
+
+                // Reglas de autorización originales.
                 .authorizeHttpRequests(auth -> auth
-                        // Login y registro DEBEN ser publicos: el usuario aun no tiene token cuando los llama.
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        // Swagger agregado del gateway y los docs de cada servicio: abiertos para la demo.
-                        .requestMatchers("/docs/**", "/swagger-ui/**", "/v3/api-docs/**", "/api-docs/**", "/webjars/**").permitAll()
-                        // Cualquier otra ruta exige un token valido (si no, 401 y no se rutea).
-                        .anyRequest().authenticated())
-                // El gateway tampoco guarda sesion: cada peticion se valida sola con su token.
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                // Activa la validacion del JWT (decoder + lectura de roles) antes de enrutar.
-                .oauth2ResourceServer(oauth -> oauth.jwt(jwt -> jwt.jwtAuthenticationConverter(converter)));
+
+                        .requestMatchers(
+                                "/docs/**",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/api-docs/**",
+                                "/webjars/**"
+                        ).permitAll()
+
+                        .anyRequest().authenticated()
+                )
+
+                // No utilizamos sesiones.
+                .sessionManagement(sm ->
+                        sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                )
+
+                // Validación JWT.
+                .oauth2ResourceServer(oauth ->
+                        oauth.jwt(jwt ->
+                                jwt.jwtAuthenticationConverter(converter)
+                        )
+                );
+
         return http.build();
     }
 }
