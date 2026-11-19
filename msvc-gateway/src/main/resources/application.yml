@@ -1,11 +1,11 @@
 spring:
   application:
     name: msvc-gateway
-    datasource:
-      username: ${DB_USERNAME:sa}
-      password: ${DB_PASSWORD:}
-    config:
-      import: optional:file:.env[.properties]
+  datasource:
+    username: ${DB_USERNAME:sa}
+    password: ${DB_PASSWORD:}
+  config:
+    import: optional:file:.env[.properties]
   cloud:
     gateway:
       server:
