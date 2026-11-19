@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
         name = "msvc-powerSupply",
-        url = "http://localhost:8087"
+        url = "http://localhost:8089"
 )
 public interface powersupplyClient {
 
-    @GetMapping("/api/v1/powersupplies/{id}")
-    powersupplyDTO getById(@PathVariable Long id);
+    @GetMapping("/api/v1/psus/{id}")
+    powersupplyDTO getById(@PathVariable("id") Long id);
 }

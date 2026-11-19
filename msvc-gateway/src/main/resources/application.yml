@@ -2,8 +2,8 @@ spring:
   application:
     name: msvc-gateway
     datasource:
-      username: ${DB_USERNAME}
-      password: ${DB_PASSWORD}
+      username: ${DB_USERNAME:sa}
+      password: ${DB_PASSWORD:}
     config:
       import: optional:file:.env[.properties]
   cloud:
@@ -14,27 +14,27 @@ spring:
           # a 'uri'. lb:// significa "busca este nombre en Eureka y balancea la carga".
           routes:
           - id: msvc-cpu
-            uri: lb://cpu
+            uri: lb://msvc-cpu
             predicates:
-                - Path=/api/v2/cpus/**
+                - Path=/api/v1/cpus/**,/api/v2/cpus/**
 
           - id: msvc-gpu
             uri: lb://msvc-gpu
             predicates:
-              - Path=/api/v2/gpu/**
+              - Path=/api/v1/gpu/**,/api/v2/gpu/**
 
           - id: msvc-ram
             uri: lb://msvc-ram
             predicates:
-              - Path=/api/v2/ram/**
+              - Path=/api/v1/ram/**,/api/v2/ram/**
 
           - id: msvc-motherboard
             uri: lb://msvc-motherboard
             predicates:
-              - Path=/api/v1/motherboards/**
+              - Path=/api/v1/motherboards/**,/api/v2/motherboards/**
 
           - id: msvc-powersupply
-            uri: lb://msvc-powersupply
+            uri: lb://msvc-powerSupply
             predicates:
               - Path=/api/v2/psus/**,/api/v1/psus/**
 
@@ -51,7 +51,7 @@ spring:
           - id: msvc-build
             uri: lb://msvc-build
             predicates:
-              - Path=/api/v1/builds/**,/api/v2/builds**
+              - Path=/api/v1/builds/**,/api/v2/builds/**
 
           - id: msvc-usuario
             uri: lb://msvc-usuario
@@ -88,7 +88,7 @@ spring:
                 - RewritePath=/api-docs/motherboard, /v3/api-docs
 
           - id: powersupply-api-docs
-            uri: lb://msvc-powersupply
+            uri: lb://msvc-powerSupply
             predicates:
                 - Path=/api-docs/powersupply
             filters:
@@ -160,9 +160,7 @@ springdoc:
 
 # CLAVE SECRETA JWT: la MISMA que en msvc-usuarios y en los microservicios. El gateway la usa para validar.
 jwt:
-<<<<<<< HEAD
-  secret: ${JWT_SECRET}
-
+  secret: ${JWT_SECRET:supersecretjwtkeyforbuildmypcproject1234567890!}
 
 # Registros de seguridad y Gateway
 logging:
@@ -170,6 +168,3 @@ logging:
     org.springframework.security: TRACE
     org.springframework.security.oauth2: TRACE
     org.springframework.cloud.gateway: DEBUG
-=======
-  secret: ${JWT_SECRET}
->>>>>>> f63f6a92514ad8417cea92430ae252de64c6b895

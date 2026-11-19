@@ -14,5 +14,4 @@ public interface cpuRepository extends JpaRepository<cpu, Long> {
     Optional<cpu> findBycpuName(String cpuName);
     cpu save(cpu cpu);
     List<cpu> findByGeneracion(String generacion);
-    List<cpu> id(Long id);
 }

@@ -25,7 +25,7 @@ public class apiExceptionHandler {
     @ExceptionHandler(psuException.class)
     public ResponseEntity<?> handlerPsuException(psuException ex) {
         Map<String, String> error = new HashMap<>();
-        error.put("error", "Ocurrió un problema al procesar el usuario. Detalle: " + ex.getMessage());
+        error.put("error", "Ocurrió un problema al procesar la fuente de poder. Detalle: " + ex.getMessage());
         return ResponseEntity.badRequest().body(error);
     }
 }

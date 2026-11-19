@@ -9,13 +9,14 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-// Endpoint PROTEGIDO: solo un ADMIN puede listar los usuarios. Demuestra el control por rol.
+// Endpoint PROTEGIDO: gestion de usuarios
 @RestController
 @RequestMapping("/api/v1/usuarios")
 @Tag(name = "Usuarios", description = "Gestion de usuarios (requiere token)")
@@ -30,7 +31,6 @@ public class UsuarioController {
 
     @GetMapping
     @Operation(summary = "Listar usuarios", description = "Solo ADMIN. Devuelve usuarios sin la contrasena.")
-    // @PreAuthorize evalua la expresion ANTES de ejecutar el metodo. hasRole('ADMIN') exige el authority ROLE_ADMIN.
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<List<UsuarioDTO>> findAll() {
         List<UsuarioDTO> usuarios = this.usuarioRepository.findAll().stream()
@@ -40,5 +40,17 @@ public class UsuarioController {
                         u.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet())))
                 .toList();
         return ResponseEntity.ok(usuarios);
+    }
+
+    @GetMapping("/{id}")
+    @Operation(summary = "Buscar usuario por ID", description = "Devuelve los datos basicos del usuario según su ID.")
+    public ResponseEntity<UsuarioDTO> findById(@PathVariable Long id) {
+        return this.usuarioRepository.findById(id)
+                .map(u -> new UsuarioDTO(
+                        u.getUsuarioId(),
+                        u.getUsername(),
+                        u.getRoles().stream().map(Rol::getNombre).collect(Collectors.toSet())))
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }

@@ -68,7 +68,7 @@ public class SecurityConfig {
                         .requestMatchers("/docs/**", "/swagger-ui/**", "/v3/api-docs/**", "/h2-console/**").permitAll()
                         // LEER (GET): lo permite cualquier usuario autenticado con uno de estos roles.
                         // Va PRIMERO que la regla de abajo para que los GET no caigan en la regla de escritura.
-                        .requestMatchers(HttpMethod.GET, "/api/v1/componentes/**", "/api/v2/componentes//**")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/componentes/**", "/api/v2/componentes/**")
                         .hasAnyRole("ADMIN", "TECNICO", "USUARIO")
                         // ESCRIBIR (todo lo que no sea GET sobre esas rutas: POST/PUT/DELETE): solo ADMIN o MEDICO.
                         .requestMatchers("/api/v1/componentes/**")

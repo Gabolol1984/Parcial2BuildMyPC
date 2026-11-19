@@ -9,5 +9,5 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface cpuClient {
 
     @GetMapping("/{id}")
-    cpuDTO getById(@PathVariable Long id);
+    cpuDTO getById(@PathVariable("id") Long id);
 }

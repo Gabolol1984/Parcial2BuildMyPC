@@ -1,4 +1,4 @@
-package com.service.services;
+package com.buildmypc.msvc.cpu.services;
 
 
 import com.buildmypc.msvc.cpu.model.cpu;

@@ -221,15 +221,22 @@ public class CotizacionServiceImpl implements CotizacionService {
     private List<DetalleCotizacion> agregarDetalle(Long componenteId, String tipoFallback) {
         if (componenteId == null) return List.of();
 
-        ComponenteDTO comp = componenteClient.getComponenteById(componenteId);
+        ComponenteDTO comp = null;
+        try {
+            comp = componenteClient.getComponenteById(componenteId);
+        } catch (Exception e) {
+            log.warn("No se pudo obtener información del componente id={}: {}", componenteId, e.getMessage());
+        }
 
-        String nombre = comp.getMarca() + " " + comp.getModelo()
-                + " (" + comp.getTipo() + ")";
+        Long idComp = (comp != null && comp.getId() != null) ? comp.getId() : componenteId;
+        Double precio = (comp != null && comp.getPrecioBase() != null) ? comp.getPrecioBase() : 0.0;
+        String nombre = (comp != null && comp.getMarca() != null ? comp.getMarca() : "") + " "
+                + (comp != null && comp.getModelo() != null ? comp.getModelo() : tipoFallback);
 
         return List.of(DetalleCotizacion.builder()
-                .componenteId(comp.getId())
-                .nombre(nombre)
-                .precio(comp.getPrecioBase())
+                .componenteId(idComp)
+                .nombre(nombre.trim().isEmpty() ? tipoFallback : nombre.trim())
+                .precio(precio)
                 .build());
     }
 

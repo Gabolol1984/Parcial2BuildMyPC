@@ -38,7 +38,7 @@ public class psuServicelmpl implements psuService {
         );
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Override
     public powerSupply updateById(Long id, powerSupply powerSupply) {
         return this.psuRepository.findById(id).map(element->{

@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(
         name = "msvc-ram",
-        url = "http://localhost:8086"
+        url = "http://localhost:8088"
 )
 public interface ramClient {
 
-    @GetMapping("/api/v1/rams/{id}")
-    ramDTO getById(@PathVariable Long id);
+    @GetMapping("/api/v1/ram/{id}")
+    ramDTO getById(@PathVariable("id") Long id);
 }
