@@ -20,7 +20,7 @@ import java.nio.charset.StandardCharsets;
 @Configuration
 public class SecurityConfig {
 
-    @Value("${jwt.secret:${JWT_SECRET:supersecretjwtkeyforbuildmypcproject1234567890!}}")
+    @Value("${jwt.secret}")
     private String secret;
 
     @Bean

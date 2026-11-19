@@ -97,7 +97,7 @@ El backend incluye archivos `.env` configurados con valores por defecto para des
 
 ```properties
 # Clave simétrica de al menos 32 caracteres (256 bits) para HMAC-SHA256
-JWT_SECRET=supersecretjwtkeyforbuildmypcproject1234567890!
+JWT_SECRET=TU_CLAVE_SECRETA_MINIMO_32_CARACTERES_AQUI
 
 # Credenciales de base de datos H2 en memoria
 DB_USERNAME=sa

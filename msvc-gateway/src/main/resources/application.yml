@@ -160,7 +160,7 @@ springdoc:
 
 # CLAVE SECRETA JWT: la MISMA que en msvc-usuarios y en los microservicios. El gateway la usa para validar.
 jwt:
-  secret: ${JWT_SECRET:supersecretjwtkeyforbuildmypcproject1234567890!}
+  secret: ${JWT_SECRET}
 
 # Registros de seguridad y Gateway
 logging:
