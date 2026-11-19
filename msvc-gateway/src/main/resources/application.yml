@@ -160,6 +160,7 @@ springdoc:
 
 # CLAVE SECRETA JWT: la MISMA que en msvc-usuarios y en los microservicios. El gateway la usa para validar.
 jwt:
+<<<<<<< HEAD
   secret: ${JWT_SECRET}
 
 
@@ -169,3 +170,6 @@ logging:
     org.springframework.security: TRACE
     org.springframework.security.oauth2: TRACE
     org.springframework.cloud.gateway: DEBUG
+=======
+  secret: ${JWT_SECRET}
+>>>>>>> f63f6a92514ad8417cea92430ae252de64c6b895
