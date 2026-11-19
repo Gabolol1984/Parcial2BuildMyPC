@@ -35,7 +35,7 @@ import java.nio.charset.StandardCharsets;
 public class SecurityConfig {
 
     // Misma clave secreta que uso msvc-usuarios para firmar: por eso el gateway puede validar la firma.
-    @Value("${jwt.secret}")
+    @Value("${JWT_SECRET}")
     private String secret;
 
     // Verifica firma y vencimiento del token en cada peticion (HS256, clave simetrica compartida).

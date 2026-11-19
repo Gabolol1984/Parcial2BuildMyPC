@@ -14,7 +14,7 @@ spring:
           # a 'uri'. lb:// significa "busca este nombre en Eureka y balancea la carga".
           routes:
           - id: msvc-cpu
-            uri: lb://msvc-cpu
+            uri: lb://cpu
             predicates:
                 - Path=/api/v2/cpus/**
 
@@ -160,4 +160,12 @@ springdoc:
 
 # CLAVE SECRETA JWT: la MISMA que en msvc-usuarios y en los microservicios. El gateway la usa para validar.
 jwt:
-  jwt.secret=${JWT_SECRET}
+  secret: ${JWT_SECRET}
+
+
+# Registros de seguridad y Gateway
+logging:
+  level:
+    org.springframework.security: TRACE
+    org.springframework.security.oauth2: TRACE
+    org.springframework.cloud.gateway: DEBUG
