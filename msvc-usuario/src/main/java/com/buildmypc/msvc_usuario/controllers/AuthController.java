@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 // Endpoints PUBLICOS (no requieren token): registrarse y autenticarse.
 @RestController
-@RequestMapping("/api/v1/auth/login")
+@RequestMapping("/api/v1/auth")
 @Tag(name = "Autenticacion", description = "Registro y login. Devuelve el JWT que usa todo el sistema.")
 public class AuthController {
 
