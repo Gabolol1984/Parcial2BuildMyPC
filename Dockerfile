@@ -1,23 +1,20 @@
-# Etapa 1: Compilar el proyecto usando Maven
+# Etapa 1: Compilar
 FROM maven:3.9-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copiamos el pom padre y el del microservicio
-COPY pom.xml .
+# Copiamos SOLO la carpeta del microservicio de usuario
 COPY msvc-usuario ./msvc-usuario
 
-# Compilamos solo el msvc-usuario
-RUN mvn clean package -DskipTests -pl msvc-usuario -am
+# Entramos a la carpeta y compilamos ahí directamente (ignoramos el pom padre)
+WORKDIR /app/msvc-usuario
+RUN mvn clean package -DskipTests
 
-# Etapa 2: Crear la imagen final ligera
+# Etapa 2: Ejecutar
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-# Copiamos el .jar generado en la etapa anterior
+# Copiamos el .jar generado
 COPY --from=build /app/msvc-usuario/target/*.jar app.jar
 
-# Exponemos el puerto (Render lo maneja internamente)
 EXPOSE 8080
-
-# Comando para ejecutar la app
 ENTRYPOINT ["java", "-jar", "app.jar"]
