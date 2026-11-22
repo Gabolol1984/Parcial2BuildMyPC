@@ -17,4 +17,5 @@ WORKDIR /app
 COPY --from=build /app/msvc-usuario/target/*.jar app.jar
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"] "app.jar"]
+
+ENTRYPOINT java -jar app.jar
