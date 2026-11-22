@@ -65,7 +65,7 @@ public class SecurityConfig {
 
         // Dirección donde se ejecuta nuestro frontend React con Vite.
         configuration.setAllowedOrigins(
-                List.of("http://localhost:5173")
+                List.of("http://localhost:5173","http://localhost:8080")
         );
 
         // Métodos HTTP que podrá utilizar React.
