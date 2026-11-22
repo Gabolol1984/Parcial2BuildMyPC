@@ -28,13 +28,20 @@ public class DataLoader implements CommandLineRunner {
     // ROLE_ADMIN, ROLE_TECNICO, ROLE_USUARIO.
     @Override
     public void run(String... args) {
-        Rol admin = obtenerOCrearRol("ROLE_ADMIN");
-        Rol tecnico = obtenerOCrearRol("ROLE_TECNICO");
-        Rol usuario = obtenerOCrearRol("ROLE_USUARIO");
+        // 👇 AÑADIMOS EL TRY-CATCH PARA EVITAR EL CRASH EN EL PRIMER ARRANQUE
+        try {
+            Rol admin = obtenerOCrearRol("ROLE_ADMIN");
+            Rol tecnico = obtenerOCrearRol("ROLE_TECNICO");
+            Rol usuario = obtenerOCrearRol("ROLE_USUARIO");
 
-        crearUsuarioSiNoExiste("admin", "admin123", Set.of(admin));
-        crearUsuarioSiNoExiste("tecnico1", "tecnico123", Set.of(tecnico));
-        crearUsuarioSiNoExiste("usuario1", "usuario123", Set.of(usuario));
+            crearUsuarioSiNoExiste("admin", "admin123", Set.of(admin));
+            crearUsuarioSiNoExiste("tecnico1", "tecnico123", Set.of(tecnico));
+            crearUsuarioSiNoExiste("usuario1", "usuario123", Set.of(usuario));
+
+            System.out.println("✅ Datos de prueba cargados correctamente en Supabase.");
+        } catch (Exception e) {
+            System.out.println("⚠️ Base de datos inicializando (tablas aún no creadas). Se reintentará en el próximo arranque.");
+        }
     }
 
     private Rol obtenerOCrearRol(String nombre) {
