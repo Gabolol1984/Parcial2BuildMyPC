@@ -23,6 +23,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.security.config.Customizer;
 import org.springframework.http.HttpMethod;
 import java.util.List;
+import java.util.Arrays;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
@@ -37,6 +38,8 @@ public class SecurityConfig {
     // Clave secreta COMPARTIDA por todos los servicios. En produccion iria en una variable de entorno.
     @Value("${jwt.secret}")
     private String secret;
+    @Value("${app.cors.origenes}")
+    private String origenesPermitidos;
 
     private SecretKey claveHmac() {
         // HS256 necesita una clave de al menos 256 bits (32 bytes).
@@ -77,7 +80,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Permite tu frontend de React y el origen de Swagger
-        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://localhost:8080"));
+        configuration.setAllowedOrigins(Arrays.asList(origenesPermitidos.split(",")));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
         configuration.setAllowCredentials(false);
