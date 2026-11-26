@@ -80,7 +80,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Permite tu frontend de React y el origen de Swagger
-        configuration.setAllowedOrigins(Arrays.asList(origenesPermitidos.split(",")));
+        configuration.setAllowedOriginPatterns(Arrays.asList(origenesPermitidos.split(",")));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
         configuration.setAllowCredentials(false);
