@@ -38,8 +38,7 @@ public class SecurityConfig {
     // Clave secreta COMPARTIDA por todos los servicios. En produccion iria en una variable de entorno.
     @Value("${jwt.secret}")
     private String secret;
-    @Value("${app.cors.origenes}")
-    private String origenesPermitidos;
+
 
     private SecretKey claveHmac() {
         // HS256 necesita una clave de al menos 256 bits (32 bytes).
@@ -76,19 +75,7 @@ public class SecurityConfig {
         return converter;
     }
 
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        // Permite tu frontend de React y el origen de Swagger
-        configuration.setAllowedOriginPatterns(Arrays.asList(origenesPermitidos.split(",")));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
-        configuration.setAllowCredentials(false);
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationConverter converter) throws Exception {
