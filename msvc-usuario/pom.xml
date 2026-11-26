@@ -58,10 +58,10 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<!-- Cliente Eureka: se registra para que el gateway lo encuentre -->
-		<!--<dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>

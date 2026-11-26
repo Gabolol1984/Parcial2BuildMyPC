@@ -37,4 +37,4 @@ build/
 # Variables de entorno
 .env
 .env.*
-!.env.example
+!.env.examplenode_modules/ 

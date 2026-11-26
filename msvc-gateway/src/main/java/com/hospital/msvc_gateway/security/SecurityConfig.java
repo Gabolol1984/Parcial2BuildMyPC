@@ -95,15 +95,13 @@ public class SecurityConfig {
     ) throws Exception {
 
         http
-                // Activa CORS para permitir las peticiones del frontend.
-                .cors(Customizer.withDefaults())
 
                 // API sin estado.
                 .csrf(csrf -> csrf.disable())
 
                 // Reglas de autorización originales.
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/auth/**").permitAll()
+                        .requestMatchers("/api/v1/auth/**", "/error").permitAll()
 
                         .requestMatchers(
                                 "/docs/**",
